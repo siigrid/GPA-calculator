@@ -10,7 +10,8 @@ class test{
 	public:
 		void enter_details(void);
 		void add_details();	
-}c1;
+		void show_details();	// MFReaper: function to show details saved in the file
+}c1,c2;	// MFReaper: added another to show results
 
 int main(){
 	char word[30];
@@ -18,10 +19,17 @@ int main(){
 	//cout<<"RETURNED";
 	c1.add_details();
 	system("cls");	
-	ifstream db;
+	
+	// MFReaper: This is only for text streams
+	// MFReaper: Binary files u must specify the data itself. See new code
+	/*
 	db.open("test_case.dat", ios::in | ios::binary);
 	db >> word;
 	cout<<word;
+	*/
+	c2.show_details();
+	
+	
 	return 0;
 }
 
@@ -35,7 +43,23 @@ void test::enter_details(){
 void test::add_details(){
 	fstream db;
 	db.open("test_case.dat", ios::out | ios::app | ios::binary);
-	if(db.is_open()){ cout<<"OPEN..."; }
-	db.write( ( char* )&c1, sizeof( test ) );
+	
+	// MFReaper: Rewrote code. included indentation. No issues.
+	if ( db ) {
+		db.write( (char*)&c1, sizeof( test ) );
+		cout << "File Opened";
+	}
 	db.close();
+	return;
+}
+
+void test::show_details() {
+	ifstream db;
+	db.open("test_case.dat", ios::in | ios::binary);
+	while( db.read( (char*)&c2, sizeof( test ) ) ) {	// MFReaper: reading the data from the file
+		// MFReaper: the data is now saved in c2 automatically
+		cout << "number: " << c2.number << endl;	
+		cout << "name: " << c2.name << endl << endl;
+	}
+	return;
 }
