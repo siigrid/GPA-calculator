@@ -1,2 +1,2 @@
 # GPA-calculator
--- schol project --
+-- school project --
