@@ -8,4 +8,5 @@ Issue: Binary files do not work with string data type because of the variability
 NOTE: 
   The `assign_ID()` function is still under development.
   
-  Say tuned for updates. ;)
+UPDATES:-
+  I/O working with binary files. Used `seekp(); seekg(); tellp(); tellg();` for this purpose.
